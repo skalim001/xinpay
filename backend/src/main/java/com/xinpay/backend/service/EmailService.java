@@ -16,8 +16,7 @@ public class EmailService {
     @Autowired
     private JavaMailSender mailSender;
     
-    @Autowired
-    private NotificationService notificationService;
+    
 
     public void sendOtpEmail(String toEmail, String otp) {
         String subject = "XinPay - OTP Verification Code";
