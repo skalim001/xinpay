@@ -1,6 +1,8 @@
 package com.xinpay.backend.config;
 
 import com.xinpay.backend.security.JwtAuthFilter;
+import com.xinpay.backend.security.SignatureValidationFilter;
+import com.xinpay.backend.security.JwtUtil;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,41 +14,34 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig {
 
-    private final JwtAuthFilter jwtAuthFilter;
+    private final JwtUtil jwtUtil;
 
-    public SecurityConfig(JwtAuthFilter jwtAuthFilter) {
-        this.jwtAuthFilter = jwtAuthFilter;
+    public SecurityConfig(JwtUtil jwtUtil) {
+        this.jwtUtil = jwtUtil;
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http,
+                                           SignatureValidationFilter signatureFilter) throws Exception {
+        JwtAuthFilter jwtAuthFilter = new JwtAuthFilter(jwtUtil);
+
         http
-            .csrf(csrf -> csrf.disable()) // ❌ Disable CSRF for APIs
+            .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 .requestMatchers(
-                    "/auth/**",                  // ✅ Public auth
-                    "/ping", "/error", "/",      // ✅ Health, home
-                    "/test/**",                  // ✅ Test
-                    "/uploads/**",               // ✅ Uploaded files
-                    "/api/upload",               // ✅ Upload
-                    "/api/deposit/status/**",    // ✅ Deposit status
-                    "/api/inr-deposits/**",      // ✅ INR deposit
-                    "/api/usdt-deposits/**",     // ✅ USDT deposit
-                    "/api/inr-withdraw/**",      // ✅ ✅ Allow INR withdraw endpoints
-                    "/api/accounts/**",
-                    "/api/usdt-withdraw/**",
-                		"/api/bank-details/**",
-                		"/api/notifications/**",
-                		"/api/user/**",
-                    "/api/commissions/**",
-                    "/api/wallet/**",
-                    "/api/balance/**",         // ✅ Balance
-                    "/api/test/**"
-                    
+                    "/auth/**", "/ping", "/error", "/", "/test/**",
+                    "/uploads/**", "/api/upload", "/api/deposit/status/**",
+                    "/api/inr-deposits/**", "/api/usdt-deposits/**",
+                    "/api/inr-withdraw/**", "/api/accounts/**",
+                    "/api/usdt-withdraw/**", "/api/bank-details/**",
+                    "/api/notifications/**", "/api/user/**", "/api/commissions/**",
+                    "/api/wallet/**", "/api/balance/**", "/api/test/**"
                 ).permitAll()
-                .anyRequest().authenticated()   // 🔐 Require auth for other routes
+                .anyRequest().authenticated()
             )
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            // Add signature filter first, then JWT
+            .addFilterBefore(signatureFilter, UsernamePasswordAuthenticationFilter.class)
+            .addFilterAfter(jwtAuthFilter, SignatureValidationFilter.class);
 
         return http.build();
     }
