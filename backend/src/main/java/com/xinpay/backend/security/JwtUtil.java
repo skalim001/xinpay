@@ -14,7 +14,6 @@ public class JwtUtil {
     private final Key secretKey = Keys.hmacShaKeyFor(SECRET.getBytes());
     private final long EXPIRATION_TIME = 1000 * 60 * 60 * 10; // 10 hours
 
-    // ✅ Generate token
     public String generateToken(String email) {
         return Jwts.builder()
                 .setSubject(email)
@@ -24,17 +23,15 @@ public class JwtUtil {
                 .compact();
     }
 
-    // ✅ Validate token safely
     public boolean validateToken(String token, String email) {
         try {
             String extractedEmail = extractEmail(token);
             return extractedEmail.equals(email) && !isTokenExpired(token);
         } catch (JwtException | IllegalArgumentException e) {
-            return false; // invalid token
+            return false;
         }
     }
 
-    // ✅ Extract email from token
     public String extractEmail(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(secretKey)
@@ -44,7 +41,6 @@ public class JwtUtil {
                 .getSubject();
     }
 
-    // ✅ Check expiration
     private boolean isTokenExpired(String token) {
         Date expiration = Jwts.parserBuilder()
                 .setSigningKey(secretKey)
