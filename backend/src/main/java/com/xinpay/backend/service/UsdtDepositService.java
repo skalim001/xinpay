@@ -30,8 +30,7 @@ public class UsdtDepositService {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private NotificationService notificationService;
+    
 
     public UsdtDepositRequest uploadDeposit(String userId, MultipartFile file, Double amount) throws IOException {
         String originalName = file.getOriginalFilename();
