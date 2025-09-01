@@ -24,8 +24,7 @@ public class InrWithdrawService {
     @Autowired
     private EmailService emailService;
 
-    @Autowired
-    private NotificationService notificationService;
+    
 
     public InrWithdrawRequest saveWithdrawRequest(InrWithdrawRequest request) {
         request.setApproved(false);
