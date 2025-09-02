@@ -27,11 +27,12 @@ public class SignatureValidationFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // ✅ Exclude admin endpoints
-        if (path.startsWith("/api/admin/")) {
-            filterChain.doFilter(request, response);
-            return;
-        }
+// ✅ Exclude admin endpoints
+if (path.startsWith("/api/admin/") || path.startsWith("/uploads/")) {
+    filterChain.doFilter(request, response);
+    return;
+}
+
 
         String signature = request.getHeader("X-App-Signature");
 
