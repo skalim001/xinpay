@@ -11,7 +11,7 @@ import java.util.*;
 @RestController
 @RequestMapping("/api/admin/usdt-deposits")
 @CrossOrigin(origins = "*") // allow web admin
-public class UsdtAdminController {
+public class UsdtDepositAdminController {
 
     @Autowired
     private UsdtDepositService usdtDepositService;
