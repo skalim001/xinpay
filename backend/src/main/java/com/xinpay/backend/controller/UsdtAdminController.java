@@ -21,7 +21,7 @@ public class UsdtAdminController {
     public ResponseEntity<List<Map<String, Object>>> getPendingDeposits() {
         List<UsdtDepositRequest> pending = usdtDepositService.getPendingDeposits();
         List<Map<String, Object>> result = new ArrayList<>();
-        String baseUrl = "https://xinpaynewbackend-master.onrender.com"; // your deployed URL
+        String baseUrl = "https://xinpay.onrender.com"; // your deployed URL
 
         for (UsdtDepositRequest deposit : pending) {
             Map<String, Object> row = new HashMap<>();
