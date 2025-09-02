@@ -35,7 +35,7 @@ public class SecurityConfig {
                     "/api/inr-withdraw/**", "/api/accounts/**",
                     "/api/usdt-withdraw/**", "/api/bank-details/**",
                     "/api/notifications/**", "/api/user/**", "/api/commissions/**",
-                    "/api/wallet/**", "/api/balance/**", "/api/test/**"
+                    "/api/wallet/**", "/api/balance/**", "/api/test/**","/api/admin/**"
                 ).permitAll()
                 .anyRequest().authenticated()
             )
