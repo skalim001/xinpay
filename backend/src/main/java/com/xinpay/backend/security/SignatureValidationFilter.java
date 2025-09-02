@@ -24,6 +24,15 @@ public class SignatureValidationFilter extends OncePerRequestFilter {
                                     FilterChain filterChain)
             throws ServletException, IOException {
 
+
+        String path = request.getRequestURI();
+
+        // ✅ Exclude admin endpoints
+        if (path.startsWith("/api/admin/")) {
+            filterChain.doFilter(request, response);
+            return;
+        }
+
         String signature = request.getHeader("X-App-Signature");
 
         if (signature == null || !EXPECTED_SIGNATURE.equalsIgnoreCase(signature)) {
