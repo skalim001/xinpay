@@ -16,7 +16,7 @@ public class InrDepositAdminController {
     @Autowired
     private InrDepositService inrDepositService;
 
-    private final String BASE_URL = "https://xinpay.onrender.com";
+    private final String BASE_URL = "https://xinpay-wtfu.onrender.com";
 
     // ✅ Fetch all pending deposits for admin panel
     @GetMapping("/pending")
