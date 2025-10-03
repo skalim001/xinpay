@@ -40,7 +40,7 @@ public class InrDepositController {
     public ResponseEntity<List<Map<String, Object>>> getPendingDeposits() {
         List<InrDepositRequest> pending = inrDepositService.getPendingDeposits();
         List<Map<String, Object>> result = new ArrayList<>();
-        String baseUrl = "https://xinpay.onrender.com";
+        String baseUrl = "https://xinpay-wtfu.onrender.com";
         for (InrDepositRequest deposit : pending) {
             Map<String, Object> row = new HashMap<>();
             row.put("id", deposit.getId());
