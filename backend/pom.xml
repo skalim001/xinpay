@@ -39,6 +39,15 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
+
+        <!-- ✅ Resend Email API SDK -->
+<dependency>
+    <groupId>com.resend</groupId>
+    <artifactId>resend-java</artifactId>
+    <version>3.0.0</version>
+</dependency>
+     
+
         <!-- ✅ Use WebClient for Resend API calls -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
