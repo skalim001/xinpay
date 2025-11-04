@@ -1,22 +1,14 @@
 // File: com.xinpay.backend.service.EmailService.java
 package com.xinpay.backend.service;
-import com.xinpay.backend.model.User;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
-import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
-
-import com.google.firebase.messaging.FirebaseMessagingException;
 
 @Service
 public class EmailService {
 
     @Autowired
-    private JavaMailSender mailSender;
-    
-    
+    private ResendEmailService resendEmailService;  // ✅ Use Resend instead of JavaMailSender
 
     public void sendOtpEmail(String toEmail, String otp) {
         String subject = "XinPay - OTP Verification Code";
@@ -27,18 +19,10 @@ public class EmailService {
                 + "If you did not request this OTP, please contact our support team immediately.\n\n"
                 + "Thank you,\n"
                 + "Team XinPay";
-        
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
 
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
 
-
-    
     public void sendWelcomeEmail(String toEmail, String fullName, String agentId) {
         String subject = "Welcome to XinPay 🎉";
         String body = "Dear " + fullName + ",\n\n"
@@ -50,52 +34,31 @@ public class EmailService {
                 + "Thank you,\n"
                 + "Team XinPay";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
-    
-    
+
     public void sendInrDepositApprovedEmail(String toEmail, String fullName, double amount) {
         String subject = "XinPay - INR Deposit Successful ✅";
         String body = "Dear " + fullName + ",\n\n"
                 + "🎉 Your INR deposit of ₹" + amount + " has been successfully verified and added to your wallet.\n\n"
-                
                 + "If you have any questions, feel free to contact our support.\n\n"
                 + "Thank you,\n"
                 + "Team XinPay";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
-    
+
     public void sendUsdtDepositApprovedEmail(String toEmail, String fullName, double amount) {
         String subject = "XinPay - USDT Deposit Successful ✅";
         String body = "Dear " + fullName + ",\n\n"
                 + "🎉 Your USDT deposit of $" + amount + " has been successfully verified and added to your wallet.\n\n"
-                
                 + "If you have any questions, feel free to contact our support.\n\n"
                 + "Thank you,\n"
                 + "Team XinPay";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
-    
+
     public void sendUsdtWithdrawApprovedEmail(String toEmail, String fullName, double amount) {
         String subject = "XinPay - USDT Withdrawal processed ✅";
         String body = "Dear " + fullName + ",\n\n"
@@ -105,16 +68,9 @@ public class EmailService {
                 + "Thank you,\n"
                 + "Team XinPay";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
-    
-    
+
     public void sendInrWithdrawApprovedEmail(String toEmail, String fullName, double amount) {
         String subject = "XinPay - INR Withdrawal processed ✅";
         String body = "Dear " + fullName + ",\n\n"
@@ -124,21 +80,6 @@ public class EmailService {
                 + "Thank you,\n"
                 + "Team XinPay";
 
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.in");
-        message.setTo(toEmail);
-        message.setSubject(subject);
-        message.setText(body);
-
-        mailSender.send(message);
+        resendEmailService.sendEmail(toEmail, subject, body);
     }
-    
-    
-    
-
-
-
-
-
-
 }
