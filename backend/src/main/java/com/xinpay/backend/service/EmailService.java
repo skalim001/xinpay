@@ -36,7 +36,7 @@ public class EmailService {
 
         mailSender.send(message);
     }
-}
+
 
     
     public void sendWelcomeEmail(String toEmail, String fullName, String agentId) {
