@@ -19,7 +19,6 @@ public class EmailService {
     
 
     public void sendOtpEmail(String toEmail, String otp) {
-    try {
         String subject = "XinPay - OTP Verification Code";
         String body = "Dear User,\n\n"
                 + "Your One-Time Password (OTP) for XinPay is: " + otp + "\n\n"
@@ -28,7 +27,7 @@ public class EmailService {
                 + "If you did not request this OTP, please contact our support team immediately.\n\n"
                 + "Thank you,\n"
                 + "Team XinPay";
-
+        
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
@@ -36,10 +35,6 @@ public class EmailService {
         message.setText(body);
 
         mailSender.send(message);
-        System.out.println("✅ Email sent successfully to " + toEmail);
-    } catch (Exception e) {
-        System.err.println("❌ Failed to send email to " + toEmail);
-        e.printStackTrace();
     }
 }
 
