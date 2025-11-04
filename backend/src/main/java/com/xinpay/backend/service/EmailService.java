@@ -29,7 +29,7 @@ public class EmailService {
                 + "Team XinPay";
         
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
@@ -49,7 +49,7 @@ public class EmailService {
                 + "Team XinPay";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
@@ -68,7 +68,7 @@ public class EmailService {
                 + "Team XinPay";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
@@ -86,7 +86,7 @@ public class EmailService {
                 + "Team XinPay";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
@@ -104,7 +104,7 @@ public class EmailService {
                 + "Team XinPay";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
@@ -123,7 +123,7 @@ public class EmailService {
                 + "Team XinPay";
 
         SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("noreply@xinpay.co.in");
+        message.setFrom("noreply@xinpay.in");
         message.setTo(toEmail);
         message.setSubject(subject);
         message.setText(body);
